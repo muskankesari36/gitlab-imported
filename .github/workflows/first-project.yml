@@ -39,7 +39,5 @@ jobs:
         fetch-depth: 20
         lfs: true
     - uses: actions/download-artifact@v4
-      with:
-        path: build/
     - run: ls -R 
-    - run: test -f build/test.txt
+    - run: test -f test.txt
