@@ -40,4 +40,4 @@ jobs:
         lfs: true
     - uses: actions/download-artifact@v4
     - run: ls -R 
-    - run: test -f test.txt
+    - run: test -f create_file/test.txt
