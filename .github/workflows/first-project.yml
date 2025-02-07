@@ -12,7 +12,7 @@ jobs:
       image: alpine
     timeout-minutes: 60
     steps:
-    - run: apt update && apt install -y git
+    - run: apk add --no-cache git
     - run: |
         which git || echo "Git not found"
         git --version || echo "Git not installed"
