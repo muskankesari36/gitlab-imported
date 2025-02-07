@@ -12,7 +12,7 @@ jobs:
       image: alpine
     timeout-minutes: 60
     steps:
-    - run: apk add --no-cache git
+    - run: apk add --no-cache git git-lfs
     - run: |
         which git || echo "Git not found"
         git --version || echo "Git not installed"
