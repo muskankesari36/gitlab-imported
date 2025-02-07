@@ -1,0 +1,43 @@
+name: AWS-terraform6170206/first-project
+on:
+  push:
+  workflow_dispatch:
+concurrency:
+  group: "${{ github.ref }}"
+  cancel-in-progress: true
+jobs:
+  create_file:
+    runs-on: ubuntu-latest
+    container:
+      image: alpine
+    timeout-minutes: 60
+    steps:
+    - run: apk add --no-cache git git-lfs
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 20
+        lfs: true
+    - run: echo "..creating"
+    - run: mkdir build
+    - run: touch build/test.txt
+    - run: ls build/
+    - uses: actions/upload-artifact@v4
+      if: success()
+      with:
+        name: "${{ github.job }}"
+        path: build/
+  test_file:
+    needs: create_file
+    runs-on: ubuntu-latest
+    container:
+      image: alpine
+    timeout-minutes: 60
+    steps:
+    - run: apk add --no-cache git git-lfs
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 20
+        lfs: true
+    - uses: actions/download-artifact@v4
+    - run: ls -R 
+    - run: test -f create_file/test.txt
