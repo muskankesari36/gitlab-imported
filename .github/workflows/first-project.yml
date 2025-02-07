@@ -12,10 +12,9 @@ jobs:
       image: alpine
     timeout-minutes: 60
     steps:
-    - name: Debug Git installation
-        run:|
-          which git || echo "Git not found"
-          git --version || echo "Git not installed"
+    - run: |
+        which git || echo "Git not found"
+        git --version || echo "Git not installed"
     - uses: actions/checkout@v4
       with:
         fetch-depth: 20
